@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Näytä data";
+    string[] TableHeaders = new string[] {"id"
+      ,"Etunimi"
+      ,"Sukunimi"
+      ,"Sähköposti"
+      ,"AvoinPalaute"};
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="table">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                @{
+                    foreach(var head in TableHeaders){
+                        <th>
+                        @head
+                        </th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+
+            @{
+                if (Model != null)
+                {
+                    foreach (var data in Model)
+                    {
+                        <tr>
+                            <td>@data.Id</td>
+                            <td>@data.Etunimi</td>
+                            <td>@data.Sukunimi</td>
+                            <td>@data.Sähköposti</td>
+                            <td>@data.AvoinPalaute</td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
