@@ -1,0 +1,58 @@
+﻿@model RiihisoftHarjoitustyö.Models.Palaute1
+@{
+    ViewData["Title"] = "Palautelomake";
+
+}
+<head>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js%22%3E"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js">
+    </script>
+    <script>
+        $(() => {
+            $("#submitButton").click(function(ev) {
+                var form = $("#SaveRecord");
+                var url = form.attr('action');
+                $.ajax({
+                    name: Etunimi,
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    success: function(data) {
+                        alert("Form Submited Successfully");
+                    },
+                    error: function(data){
+                        alert("Some Error");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<h1>@ViewData["Title"]</h1>
+<form id="formId" action=""></form>
+<div class="container" style="width:40%" margin-top="2%">
+
+@using (Html.BeginForm("SaveRecord", "Home", FormMethod.Post))
+{
+
+        @Html.TextBoxFor(model => model.Etunimi, new {@class = "form-control", @placeholder="Etunimi"})
+        @Html.TextBoxFor(model => model.Sukunimi, new {@class = "form-control", @placeholder="Sukunimi"})
+        @Html.TextBoxFor(model => model.Sähköposti, new {@class = "form-control", @placeholder="Sähköposti"})
+       <!-- <label for="Etunimi">Etunimi:</label>
+        <input type="text" id="Etunimi" name="Etunimi" />
+        <br>
+        <label for="Sukunimi">Sukunimi:</label>
+        <input type="text" id="Sukunimi" name="Sukunimi" />
+        <br>
+        <label for="Sahkoposti">Sähköposti:</label>
+        <input type="text" id="Sahkoposti" name="Sahkoposti" />
+        <br>
+     <label for="Avoinpalaute">Avoin palaute:</label> -->
+        @Html.TextAreaFor(model => model.AvoinPalaute, new {@class = "form-control", @placeholder="Avoin palaute tähän." })
+        <br>
+        <button type="submit" id="submitButton" value="Lähetä" class="btn btn-block btn-primary" onclick=""></button>
+        <input type="submit" value="Lähetä" class="btn btn-block btn-primary" />
+
+}
+
+</div>
